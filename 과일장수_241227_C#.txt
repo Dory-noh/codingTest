@@ -1,0 +1,16 @@
+using System;
+using System.Linq;
+public class Solution {
+    public int solution(int k, int m, int[] score) {
+        int answer = 0;
+        //내림차순 정렬하기
+        int[] sortedScoreDesc = score.OrderByDescending(x=>x).ToArray();
+        //sortedScoreDesc배열의 m의 배수 번째 있는 값과 m 값을 곱한 값을 answer에 순차적으로 더하기
+        for(int i = 0; i < sortedScoreDesc.Length; i++){
+            if((i+1) % m == 0) answer += (sortedScoreDesc[i])*m;
+        }
+        //answer 리턴
+        
+        return answer;
+    }
+}
