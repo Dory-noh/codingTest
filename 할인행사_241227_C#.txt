@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution {
+    public int solution(string[] want, int[] number, string[] discount) {
+        int answer = 0;
+        //위시리스트 딕셔너리 생성
+        Dictionary<string, int> wantDict = new Dictionary<string, int>();
+        for(int i = 0; i < want.Length; i++){
+            wantDict.Add(want[i], number[i]);
+        }
+        //오늘부터 10일 간 - (위시리스트 물품(Key) 중) 할인 품목 구매 가능 수를 Value로 갖는 딕셔너리 생성
+        for(int i = 0; i < discount.Length - 9; i++){
+            Dictionary<string,int> tempDict = new Dictionary<string, int>();
+            for(int j = i ; j < 10 + i; j++){
+                if(tempDict.ContainsKey(discount[j])){
+                    tempDict[discount[j]]++;
+                }
+                else if(wantDict.ContainsKey(discount[j])){
+                    
+                    tempDict.Add(discount[j], 1);
+                }
+            }
+            //원하는 아이템 중 하나라도 할인 안하는 것이 있다면 다음 날로 넘어감(continue)
+            if(wantDict.Count > tempDict.Count) continue;
+            int count = 0;
+            foreach(var item in tempDict){
+                if(wantDict[item.Key]>item.Value){
+                    break;
+                }
+                count++;
+            }
+            //위시리스트의 모든 물품을 원하는 수만큼 구매 가능한 경우 answer++;
+            if(count==tempDict.Count) answer++;
+        }
+        
+        return answer;
+    }
+}
