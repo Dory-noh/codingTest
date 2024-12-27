@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+// https://school.programmers.co.kr/learn/courses/30/lessons/131127
 public class Solution {
     public int solution(string[] want, int[] number, string[] discount) {
         int answer = 0;
@@ -37,3 +37,4 @@ public class Solution {
         return answer;
     }
 }
+
