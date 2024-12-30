@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+
+//누적합 //연속된 부분 수열이므로 누적합을 이용한다.
+public class Solution {
+    public int solution(int[] elements) {
+        int answer = 0;
+        int[] elementsX2 = new int[elements.Length*2];
+        for(int i = 0; i < elementsX2.Length; i++){
+            elementsX2[i] = elements[i%elements.Length];
+        }
+        int[] prefixSum = new int[elementsX2.Length];
+        prefixSum[0] = elementsX2[0];
+        for(int i = 1; i < elementsX2.Length; i++){
+            prefixSum[i] = prefixSum[i-1] + elementsX2[i];
+        }
+        
+        SortedSet<int> nums = new SortedSet<int>() {};
+        for(int len = 1; len < elements.Length+1; len++){
+            for(int i = 0; i < elements.Length; i++){
+                int sum = prefixSum[i+len] - prefixSum[i];
+                nums.Add(sum);
+            }
+        }
+        
+        return answer=nums.Count;
+    }
+}
