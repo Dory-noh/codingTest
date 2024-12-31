@@ -5,16 +5,18 @@ using System.Collections.Generic;
 public class Solution {
     public int solution(int[] elements) {
         int answer = 0;
+	//elements를 두 개 이어 붙인 배열 선언 및 초기화
         int[] elementsX2 = new int[elements.Length*2];
         for(int i = 0; i < elementsX2.Length; i++){
             elementsX2[i] = elements[i%elements.Length];
         }
+	//누적합 배열 선언 및 값 할당
         int[] prefixSum = new int[elementsX2.Length];
         prefixSum[0] = elementsX2[0];
         for(int i = 1; i < elementsX2.Length; i++){
             prefixSum[i] = prefixSum[i-1] + elementsX2[i];
         }
-        
+        //집합을 통하여 개수별 중복없는 합의 수 구함.
         SortedSet<int> nums = new SortedSet<int>() {};
         for(int len = 1; len < elements.Length+1; len++){
             for(int i = 0; i < elements.Length; i++){
