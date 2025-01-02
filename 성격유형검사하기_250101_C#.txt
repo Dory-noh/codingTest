@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+public class Solution {
+    public string solution(string[] survey, int[] choices) {
+        string answer = "";
+        Dictionary<char, int> KPTT = new Dictionary<char,int>() {
+            {'R',0},{'T',0},{'C',0},{'F',0},{'J',0},{'M',0},{'A',0},{'N',0}
+        };
+        int[] points = {3,2,1,0,1,2,3};
+        for(int i = 0; i < survey.Length; i++){
+            int point = choices[i] - 1;
+            if(point<3) {
+                KPTT[survey[i][0]]+=points[point];
+            }
+            else if(point>3) KPTT[survey[i][1]]+=points[point];
+        }
+        answer += (KPTT['R']>=KPTT['T']) ? 'R' : 'T';
+        answer += (KPTT['C']>=KPTT['F']) ? 'C' : 'F';
+        answer += (KPTT['J']>=KPTT['M']) ? 'J' : 'M';
+        answer += (KPTT['A']>=KPTT['N']) ? 'A' : 'N';
+        return answer;
+    }
+}
