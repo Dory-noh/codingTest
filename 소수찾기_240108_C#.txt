@@ -1,0 +1,22 @@
+using System.Collections.Generic;
+
+//에라토스테네스의 체 활용
+public class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        bool isDecimal;
+        List<int> numList = new List<int> {};
+        if(n == 2) return 1;
+        for(int i = 3; i <= n; i+=2){
+            isDecimal = true;
+            for(int j = 0; j*j < numList.Count; j++){
+                if(i%numList[j]==0) {
+                    isDecimal = false;
+                    break;
+                }
+            }
+            if(isDecimal) numList.Add(i);
+        }
+        return answer=numList.Count+1;
+    }
+}
