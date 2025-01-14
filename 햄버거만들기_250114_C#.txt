@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution {
+    public int solution(int[] ingredient) {
+        int answer = 0;
+        int[] recipe = {1,2,3,1};
+        List<int> ingreList = ingredient.ToList();
+        for(int i = 3; i < ingreList.Count; i++){
+            for(int j = 0; j < 4; j++){
+                //쌓여있는 재료의 수가 3개 이하거나 현재 필요한 재료가 아니면 비교 중지
+                if(i-j < 0 || ingreList[i-j] != recipe[3-j]) break;
+                //재료가 원하는 순서대로 쌓여있으면 재료 리스트에서 지움
+                if(j == 3) {
+                    ingreList.RemoveRange(i-3,4);
+                    i-=3;
+                    ++answer;
+                }
+            }
+        }
+        return answer;
+    }
+}
