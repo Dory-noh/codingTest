@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution {
+    public int[] solution(string today, string[] terms, string[] privacies) {
+        //배열, 딕셔너리 정의
+        int todayInt = ConvertDayToInt(today);
+        
+        List<int> answer = new List<int>{};
+        int dayArr = -1;
+        
+        Dictionary<char, int> termDict = new Dictionary<char, int> {};
+        //딕셔너리 키값은 약관 명, value값은 약관의 보관월수 * 28로 함.
+        for(int i = 0; i < terms.Length; i++){
+            string[] temp = terms[i].Split(' ');
+            termDict.Add(temp[0][0], int.Parse(temp[1])*28);
+        }
+        //기한 지났는지 판별
+        for(int i = 0; i < privacies.Length; i++){
+            string[] temp = privacies[i].Split(' ');
+            dayArr = ConvertDayToInt(temp[0]) + termDict[temp[1][0]];
+            if(dayArr <= todayInt) answer.Add(i+1);
+        }
+        return answer.ToArray();
+    }
+    
+    //연월일을 숫자로 변환하는 메서드
+    public int ConvertDayToInt(string date){
+        string[] dateArr = date.Split('.');
+        return (int.Parse(dateArr[0])-2000) * 12 * 28 + int.Parse(dateArr[1]) * 28 + int.Parse(dateArr[2]);
+    }
+}
