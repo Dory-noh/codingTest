@@ -7,7 +7,7 @@ public class Solution {
     int[] visited;
     
     public int solution(int k, int[,] dungeons) {
-        //같은 클래스에 있는 다른 메서드에서도 변수 접근 가능하도록 public 사용
+
         answer = 0;
         //c# 2차원 배열에서 Length값 조회시 행*열 값이 출력된다. 행의 값만 받기 위해 GetLength(0) 사용.
         N = dungeons.GetLength(0);
