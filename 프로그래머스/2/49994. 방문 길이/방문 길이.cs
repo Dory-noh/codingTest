@@ -25,7 +25,7 @@ public class Solution {
             char dir = dirs[i];
             //다음 이동할 점의 좌표를 구한다.
             int[] nextPos = {originPos[0],originPos[1]};
-            // int[] tempPos = originPos; 이렇게하면 참조에 의한 전달이 되어 값이 바뀌어 버린다!
+            // int[] nextPos = originPos; 이렇게 하면 참조에 의한 전달이 되어 nextPos 수정 시 originPos값이 바뀌어 버린다!
             
             switch(dir){
                 case 'L': //x좌표 값 -1
