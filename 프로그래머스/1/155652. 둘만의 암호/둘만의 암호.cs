@@ -17,7 +17,7 @@ public class Solution {
             alphaList.Remove(ch);
         }
         
-        //바꿀 문자의 위치를 찾고 index를 더한다. 알파벳 리스트 범위를 넘어갈 경우 다시 앞쪽부터 찾도록 나머지 연산을 해주었다.
+        //바꿀 문자의 위치를 찾고 index를 더한다. 알파벳 리스트 범위를 넘어갈 경우, 다시 앞쪽부터 찾도록 나머지 연산을 해주었다.
         foreach(char ch in s){
             answer += alphaList[(alphaList.FindIndex(x=>x.Equals(ch))+index)%alphaList.Count];
         }
