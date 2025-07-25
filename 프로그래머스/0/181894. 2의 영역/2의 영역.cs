@@ -7,8 +7,6 @@ public class Solution {
         //2의 개수를 샌다
         int n = arr.Count(x=>x==2);
         n = n >= 2 ? 2: n;
-        //IndexOf 사용을 위해 정수형 배열을 문자형 배열로 전환하였다.
-        string strArr = String.Join("/", arr);
         List<int> tempList = new List<int> {};
         int[] answer = new int[] {};
         switch(n){
@@ -23,14 +21,12 @@ public class Solution {
             case 2:
             //2가 2개 이상일 경우 첫 2 ~ 마지막 2 배열 리턴
                 int[] idx = new int[2];
-                idx[0] = strArr.IndexOf('2');
-                idx[1] = strArr.LastIndexOf('2');
+                //해당 배열에서 2가 등장하는 첫 인덱스 찾기
+                idx[0] = Array.IndexOf(arr, 2);
+                //해당 배열에서 2가 등장하는 마지막 인덱스 찾기
+                idx[1] = Array.LastIndexOf(arr,2);
                 for(int i = idx[0]; i <= idx[1]; i++){
-                    if(strArr[i]=='/') continue;
-                    string tempStr = strArr[i]+"";
-                    if(strArr[i]=='1' && i!=idx[1] && strArr[i+1] == '0') {tempStr += strArr[i+1]+""; i++;
-                                                                          }
-                    tempList.Add(Int32.Parse(tempStr));
+                    tempList.Add(arr[i]);
                 }
                 break;
         }
