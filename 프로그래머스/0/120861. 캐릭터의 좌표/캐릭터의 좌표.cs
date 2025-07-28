@@ -1,35 +1,28 @@
 using System;
+using System.Collections.Generic;
 
 public class Solution {
     public int[] solution(string[] keyinput, int[] board) {
         int[] answer = {0, 0};
-        //switch문을 이용한 좌표값 계산 algorithm
         
-        //1. board값을 활용해 x, y축 각각 좌표의 최댓값/최솟값을 구한다.
-        int[] MaxCoord = {board[0]/2, board[1]/2}; //board의 모든 원소 값은 홀수이다.
-        //2. for문을 돌려 keyinput 배열에 저장된 키 입력을 하나씩 처리한다.
+        //dictionary를 이용한 좌표값 계산 algorithm
+        
+        //방향키 별 연산을 담은 배열 선언 및 초기화
+        var keyDict = new Dictionary<string, int[]> 
+        {
+            {"up",new int[]{0,1}},{"down",new int[]{0,-1}},
+            {"left",new int[]{-1,0}},{"right",new int[]{1,0}}
+        };
+        //1. board값을 활용해 x, y축 각각 좌표의 끝점 좌표를 구한다.
+        //board의 모든 원소 값은 홀수이다.
+        int maxX = board[0]/2;
+        int maxY = board[1]/2;
+        //2. foreach문을 돌려 keyinput 배열에 저장된 키 입력을 하나씩 처리한다.
         foreach(string arrow in keyinput){
-            switch(arrow){
-                case "left":
-                    answer[0]--;
-                    if (answer[0] < -MaxCoord[0]) answer[0] = -MaxCoord[0];
-                    break;
-                case "right":
-                    answer[0]++;
-                    if (answer[0] > MaxCoord[0]) answer[0] = MaxCoord[0];
-                    break;
-                case "up":
-                    answer[1]++;
-                    if (answer[1] > MaxCoord[1]) answer[1] = MaxCoord[1];
-                    break;
-                case "down":
-                    answer[1]--;
-                    if (answer[1] < -MaxCoord[1]) answer[1] = -MaxCoord[1];
-                    break;
-                default:
-                    break;
+            var move = keyDict[arrow];
+            answer[0] = Math.Clamp(answer[0] + move[0], -maxX, maxX);
+            answer[1] = Math.Clamp(answer[1] + move[1], -maxY, maxY);
             }
-        }
         //3. 출력한다.
         return answer;
     }
